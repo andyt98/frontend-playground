@@ -1,27 +1,27 @@
-const path = require('path');
+import { join } from "path";
 
-const express = require('express');
+import express from "express";
 
-const defaultRoutes = require('./routes/default');
-const restaurantRoutes = require('./routes/restaurants');
+import defaultRoutes from "./routes/default";
+import restaurantRoutes from "./routes/restaurants";
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', defaultRoutes);
-app.use('/', restaurantRoutes);
+app.use("/", defaultRoutes);
+app.use("/", restaurantRoutes);
 
 app.use(function (req, res) {
-  res.render('404');
+  res.render("404");
 });
 
 app.use(function (error, req, res, next) {
-  res.render('500');
+  res.render("500");
 });
 
 app.listen(3000);
